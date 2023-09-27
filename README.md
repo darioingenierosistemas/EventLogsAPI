@@ -13,4 +13,4 @@ Ejecute el proyecto.
 
 En el EventLogsAPI ejecute en la linea de comandos
 dotnet ef database update firstmigration
-Asegurece que la conexion a la base de datos en el SQLConnection este correcta en el archivo appsettings.json
+Asegurece que la conexion a la base de datos en el SQLConnection este correcta en el archivo appsettings.json y usar el Test-BACKUP que se encuentra en el repositorio
