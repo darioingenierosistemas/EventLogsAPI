@@ -84,10 +84,7 @@ namespace FormEventLog
 
         private void dataGridViewEvents_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 3)
-            {
- 
-            }
+           
         }
 
         private void openForm(Object obj)

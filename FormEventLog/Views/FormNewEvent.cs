@@ -46,23 +46,27 @@ namespace FormEventLog.Views
 
         private async void btnSaveEventLog_Click(object sender, EventArgs e)
         {
-            EventLogs eventLog = new EventLogs();
-            eventLog.EventDate = fechaSeleccionada;
-            eventLog.Description = txbDescription.Text;
-            eventLog.EventType = valorSeleccionado;
-
-            string json = JsonConvert.SerializeObject(eventLog);
-
-            HttpClient httpClient = new HttpClient();
-            HttpResponseMessage response = await httpClient.PostAsync
-              (url + "eventlogs", new StringContent(json, Encoding.UTF8, "application/json"));
-
-            if (response.IsSuccessStatusCode)
+            if (valorSeleccionado != string.Empty && txbDescription.Text != string.Empty)
             {
-                this.Close();
-                th = new Thread(openForm);
-                th.SetApartmentState(ApartmentState.STA);
-                th.Start();
+                EventLogs eventLog = new EventLogs();
+                eventLog.EventDate = fechaSeleccionada;
+                eventLog.Description = txbDescription.Text;
+                eventLog.EventType = valorSeleccionado;
+
+                string json = JsonConvert.SerializeObject(eventLog);
+
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage response = await httpClient.PostAsync
+                  (url + "eventlogs", new StringContent(json, Encoding.UTF8, "application/json"));
+
+                if (response.IsSuccessStatusCode)
+                {
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Verifique los datos");
             }
 
         }
