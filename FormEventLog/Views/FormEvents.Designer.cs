@@ -46,7 +46,6 @@
             this.dataGridViewEvents.Size = new System.Drawing.Size(535, 221);
             this.dataGridViewEvents.TabIndex = 0;
             this.dataGridViewEvents.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEvents_CellClick);
-
             // 
             // btnNewEvent
             // 

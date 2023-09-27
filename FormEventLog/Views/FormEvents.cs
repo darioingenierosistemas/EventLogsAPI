@@ -21,27 +21,44 @@ namespace FormEventLog
     public partial class FormEvents : Form
     {
         Thread th;
-        private BindingList<List<EventLogs>> dataList = new BindingList<List<EventLogs>>();
-        private BindingSource bindingSource = new BindingSource();
         string url = $"https://localhost:7258/";
 
         public FormEvents()
         {
             InitializeComponent();
-            
 
         }
 
         private async void FormEvents_Load(object sender, EventArgs e)
         {
 
-            DataGrid();
+            await DataGrid();
 
         }
 
-        private async void DataGrid()
+        private async Task DataGrid()
         {
-            dataGridViewEvents.DataSource = await Listar();
+            List<EventLogs> logs = await Listar();
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("EventId", typeof(int));
+            dt.Columns.Add("EventDate", typeof(DateTime));
+            dt.Columns.Add("Description", typeof(string));
+            dt.Columns.Add("EventType", typeof(string));
+
+            foreach (var item in logs)
+            {
+                DataRow row = dt.NewRow();
+                row["EventId"] = item.EventId;
+                row["EventDate"] = item.EventDate;
+                row["Description"] = item.Description;
+                row["EventType"] = item.EventType;
+
+                dt.Rows.Add(row);
+            }
+
+            dataGridViewEvents.DataSource = dt;
+
             dataGridViewEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridViewEvents.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
@@ -91,8 +108,6 @@ namespace FormEventLog
         {
           
         }
-
-      
 
        
     }
